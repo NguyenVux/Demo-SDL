@@ -12,7 +12,12 @@
             "displayName": "Emscripten base",
             "binaryDir": "build",
             "generator": "Ninja",
-            "toolchainFile": "emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake"
+            "toolchainFile": "emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake",
+            "cacheVariables": {
+                "BOX2D_VALIDATE": "OFF",
+                "BOX2D_UNIT_TESTS": "ON",
+                "BOX2D_SAMPLES": "OFF"
+            }
         },
         {
             "name": "Debug",

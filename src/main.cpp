@@ -2,6 +2,7 @@
 #include <iostream>
 #include <emscripten.h>
 #include <emscripten/html5.h>
+#include <box2d/box2d.h>
 
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;

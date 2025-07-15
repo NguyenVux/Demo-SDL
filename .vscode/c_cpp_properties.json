@@ -4,7 +4,8 @@
             "name": "Emscripten",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/emsdk/upstream/emscripten/system/include"
+                "${workspaceFolder}/emsdk/upstream/emscripten/system/include",
+                "${workspaceFolder}/box2d/include"
             ],
             "defines": [
                 "EMSCRIPTEN"
