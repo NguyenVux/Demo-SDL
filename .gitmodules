@@ -2,3 +2,6 @@
 	path = emsdk
 	url = https://github.com/emscripten-core/emsdk.git
 	branch = main
+[submodule "box2d"]
+	path = box2d
+	url = https://github.com/erincatto/box2d.git

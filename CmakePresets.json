@@ -1,0 +1,48 @@
+{	    
+    "$schema": "https://raw.githubusercontent.com/Kitware/CMake/master/Help/manual/presets/schema.json",
+    "version": 10,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 21,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "baseConfig",
+            "displayName": "Emscripten base",
+            "binaryDir": "build",
+            "generator": "Ninja",
+            "toolchainFile": "emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake"
+        },
+        {
+            "name": "Debug",
+            "displayName": "Emscripten Debug",
+            "inherits": "baseConfig",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "Release",            
+            "displayName": "Emscripten Release",
+            "inherits": "baseConfig",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        }
+
+
+    ],
+    "buildPresets": [
+        {
+            "name": "Debug",
+            "configurePreset": "Debug",
+            "configuration": "Debug"
+        },
+        {
+            "name": "Release",
+            "configurePreset": "Release",
+            "configuration": "Release"
+        }
+    ]
+}
