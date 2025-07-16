@@ -8,14 +8,28 @@ set(CMAKE_CXX_STANDARD 20)
 
 
 add_subdirectory(${CMAKE_SOURCE_DIR}/box2d)
-add_executable(DemoSDL src/main.cpp)
+add_executable(DemoSDL 
+    "${CMAKE_SOURCE_DIR}/src/main.cpp"
+    "${CMAKE_SOURCE_DIR}/src/FSM.cpp"
+    "${CMAKE_SOURCE_DIR}/src/FSM.h"
+    "${CMAKE_SOURCE_DIR}/src/IState.h"
+    "${CMAKE_SOURCE_DIR}/src/Application.cpp"
+    "${CMAKE_SOURCE_DIR}/src/Application.h"
+    "${CMAKE_SOURCE_DIR}/src/DebugLayer.cpp"
+    "${CMAKE_SOURCE_DIR}/src/DebugLayer.h"
+    "${CMAKE_SOURCE_DIR}/src/ILayer.h"
+    "${CMAKE_SOURCE_DIR}/src/MainGameLayer.cpp"
+    "${CMAKE_SOURCE_DIR}/src/MainGameLayer.h"
+    "${CMAKE_SOURCE_DIR}/src/Time.h"
+    "${CMAKE_SOURCE_DIR}/src/Time.cpp"
+)
 set_target_properties(DemoSDL PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/dist
     LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/dist
     ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/dist
 )
 target_link_libraries(DemoSDL PRIVATE box2d::box2d)
-
+target_precompile_headers(DemoSDL PRIVATE "${CMAKE_SOURCE_DIR}/src/pch.h")
 # Add SDL2 for Emscripten
 if(EMSCRIPTEN)
     target_compile_options(DemoSDL PRIVATE -sUSE_SDL=2)
