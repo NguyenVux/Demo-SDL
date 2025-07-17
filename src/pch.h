@@ -2,8 +2,9 @@
 #include <stdio.h>
 #include <memory>
 #ifdef EMSCRIPTEN
-#include <SDL.h>
 #include <emscripten.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #endif
 
 #ifndef NDEBUG
@@ -18,3 +19,4 @@
 
 #include "Time.h"
 #include "Application.h"
+#include "Animation.h"

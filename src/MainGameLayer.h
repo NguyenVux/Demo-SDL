@@ -2,6 +2,7 @@
 #include "ILayer.h"
 #include "FSM.h"
 class Application;
+class Animation;
 class MainGameLayer : public ILayer {
 public:
 	MainGameLayer(Application* app);
@@ -17,5 +18,6 @@ public:
 
 private:
 	FSM m_fsm;
+	Animation* anim;
 	Application* m_app;
 };

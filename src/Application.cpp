@@ -10,7 +10,7 @@ void Application::AddLayer(std::unique_ptr<ILayer> layer) {
 
 void Application::Init() {
 	if (!m_initialized) {
-		#ifdef EMSCRIPTEN
+#ifdef EMSCRIPTEN
 		if (SDL_Init(SDL_INIT_VIDEO) != 0) {
 			return;
 		}
@@ -26,7 +26,14 @@ void Application::Init() {
 			SDL_Quit();
 			return;
 		}
-		#endif
+#endif // EMSCRIPTEN
+		int imgFlags = IMG_INIT_PNG;
+		if (IMG_Init(imgFlags) & imgFlags) {
+			printf("SDL_image initialized successfully.\n");
+		}
+		else {
+			emscripten_cancel_main_loop();
+		}
 		m_initialized = true;
 	}
 }

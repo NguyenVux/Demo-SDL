@@ -22,17 +22,26 @@ add_executable(DemoSDL
     "${CMAKE_SOURCE_DIR}/src/MainGameLayer.h"
     "${CMAKE_SOURCE_DIR}/src/Time.h"
     "${CMAKE_SOURCE_DIR}/src/Time.cpp"
+    "${CMAKE_SOURCE_DIR}/src/Animation.h"
+    "${CMAKE_SOURCE_DIR}/src/Animation.cpp"
 )
 target_link_libraries(DemoSDL PRIVATE box2d::box2d)
 target_precompile_headers(DemoSDL PRIVATE "${CMAKE_SOURCE_DIR}/src/pch.h")
 # Add SDL2 for Emscripten
 if(EMSCRIPTEN)
-    target_compile_options(DemoSDL PRIVATE -sUSE_SDL=2)
+    target_compile_options(DemoSDL PRIVATE 
+        --use-port=sdl2
+        --use-port=sdl2_image:formats=png
+    )
     target_link_options(DemoSDL PRIVATE 
-        -sUSE_SDL=2 
+        --use-port=sdl2
+        --use-port=sdl2_image:formats=png
         -sWASM=1 
         -sALLOW_MEMORY_GROWTH=1
         -sFULL_ES2=1
         -sUSE_WEBGL2=1
+        --shell-file "${CMAKE_SOURCE_DIR}/dist/index.html"
+        --preload-file ${CMAKE_SOURCE_DIR}/assets/@assets/
+        --use-preload-plugins
     )
 endif()
