@@ -17,6 +17,8 @@ add_executable(DemoSDL
     "${CMAKE_SOURCE_DIR}/src/DebugLayer.cpp"
     "${CMAKE_SOURCE_DIR}/src/DebugLayer.h"
     "${CMAKE_SOURCE_DIR}/src/ILayer.h"
+    "${CMAKE_SOURCE_DIR}/src/LayerStack.cpp"
+    "${CMAKE_SOURCE_DIR}/src/LayerStack.h"
     "${CMAKE_SOURCE_DIR}/src/MainGameLayer.cpp"
     "${CMAKE_SOURCE_DIR}/src/MainGameLayer.h"
     "${CMAKE_SOURCE_DIR}/src/Time.h"

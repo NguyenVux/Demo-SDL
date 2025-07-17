@@ -1,7 +1,7 @@
 #pragma once
-#include <vector>
 #include <memory>
 #include "ILayer.h"
+#include "LayerStack.h"
 
 class SDL_Window;
 class SDL_Renderer;
@@ -16,8 +16,10 @@ public:
 	bool IsInitialized() const;
 	SDL_Window* GetWindow() const;
 	SDL_Renderer* GetRenderer() const;
+	LayerStack& GetLayerStack();
+	const LayerStack& GetLayerStack() const;
 private:
-	std::vector<std::unique_ptr<ILayer>> m_layers;
+	LayerStack m_layerStack;
 	bool m_initialized;
 	SDL_Window* m_window;
 	SDL_Renderer* m_renderer;

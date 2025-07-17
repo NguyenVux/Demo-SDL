@@ -4,8 +4,7 @@
 Application::Application() : m_initialized(false), m_window(nullptr), m_renderer(nullptr) {}
 
 void Application::AddLayer(std::unique_ptr<ILayer> layer) {
-	layer->Init();
-	m_layers.emplace_back(std::move(layer));
+	m_layerStack.AddLayer(std::move(layer));
 }
 
 void Application::Init() {
@@ -57,24 +56,28 @@ void Application::Destroy() {
 
 void Application::Loop() {
 	if (m_initialized) {
-		#ifdef __EMSCRIPTEN__ 
+#ifdef __EMSCRIPTEN__ 
 		SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, 255);
 		SDL_RenderClear(m_renderer);
-		#endif // __EMSCRIPTEN__ 
-		for (auto& layer : m_layers) {
-			layer->PreFrame();
-			layer->Update();
-			layer->Render();
-		}
-		#ifdef __EMSCRIPTEN__ 
+#endif // __EMSCRIPTEN__
+		m_layerStack.PreFrame();
+		m_layerStack.Update();
+		m_layerStack.Render();
+#ifdef __EMSCRIPTEN__
 		SDL_RenderPresent(m_renderer);
-		#endif // __EMSCRIPTEN__ 
-		for (auto& layer : m_layers) {
-			layer->PostFrame();
-		}
+#endif // __EMSCRIPTEN__
+		m_layerStack.PostFrame();
 	}
 }
 
 bool Application::IsInitialized() const { return m_initialized; }
 SDL_Window* Application::GetWindow() const { return m_window; }
 SDL_Renderer* Application::GetRenderer() const { return m_renderer; }
+
+LayerStack& Application::GetLayerStack() {
+	return m_layerStack;
+}
+
+const LayerStack& Application::GetLayerStack() const {
+	return m_layerStack;
+}

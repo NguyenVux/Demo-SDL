@@ -21,8 +21,8 @@ void Animation::Update() {
 	m_accumulateTime  += delta;
 	if(m_accumulateTime > frameTime)
 	{
-		m_currentFrame = ++m_currentFrame % m_frames.size();
-		m_accumulateTime -= frameTime;
+		m_currentFrame = (m_currentFrame + m_accumulateTime / frameTime) % m_frames.size();
+		m_accumulateTime = 0;
 		// printf("Frame: %d\n", m_currentFrame);
 	}
 }
