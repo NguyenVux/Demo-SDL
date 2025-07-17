@@ -51,6 +51,9 @@ void LayerStack::PreFrame() {
 void LayerStack::Update() {
 	for (auto& layer : m_layers) {
 		if (layer != nullptr) {
+			if(!layer->IsEnabled()) {
+				continue;
+			}
 			layer->Update();
 		}
 	}
