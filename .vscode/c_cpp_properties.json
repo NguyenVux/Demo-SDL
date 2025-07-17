@@ -13,7 +13,7 @@
             "compilerPath": "${workspaceFolder}/emsdk/upstream/emscripten/emcc.bat",
             "cStandard": "c11",
             "cppStandard": "c++20",
-            "intelliSenseMode": "clang-x86"
+            "intelliSenseMode": "linux-clang-x86"
         }
     ],
     "version": 4
