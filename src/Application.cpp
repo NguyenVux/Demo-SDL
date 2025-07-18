@@ -1,63 +1,64 @@
 #include "pch.h"
 #include "Application.h"
 
-Application::Application() : m_initialized(false), m_window(nullptr), m_renderer(nullptr) {}
+Application::Application()
+	: m_initialized(false)
+	, m_window(nullptr)
+	, m_renderer(nullptr)
+	, m_isExiting(false) {
+}
 
 void Application::AddLayer(std::unique_ptr<ILayer> layer) {
 	m_layerStack.AddLayer(std::move(layer));
 }
 
 void Application::Init() {
-	std::cout << "Application::Init() called" << std::endl;
-	if (!m_initialized) {
-		std::cout << "Initializing SDL..." << std::endl;
-		if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-			printf("SDL_Init failed: %s\n", SDL_GetError());
-			return;
-		}
-		std::cout << "Creating window..." << std::endl;
-		m_window = SDL_CreateWindow("Demo-SDL", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 720, SDL_WINDOW_SHOWN);
-		if (!m_window) {
-			printf("SDL_CreateWindow failed: %s\n", SDL_GetError());
-			SDL_Quit();
-			return;
-		}
-		std::cout << "Creating renderer..." << std::endl;
-		m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-		if (!m_renderer) {
-			printf("SDL_CreateRenderer failed: %s\n", SDL_GetError());
-			SDL_DestroyWindow(m_window);
-			m_window = nullptr;
-			SDL_Quit();
-			return;
-		}
-#ifdef __EMSCRIPTEN__
-		int imgFlags = IMG_INIT_PNG;
-		if (IMG_Init(imgFlags) & imgFlags) {
-			printf("SDL_image initialized successfully.\n");
-		}
-		else {
-			emscripten_cancel_main_loop();
-		}		
-#endif // __EMSCRIPTEN__ 
-		printf("Application initialized successfully.\n");
-		m_initialized = true;
-	}
+	   std::cout << "Application::Init() called" << std::endl;
+	   if (!m_initialized) {
+			   std::cout << "Initializing SDL..." << std::endl;
+			   int initFlags = SDL_INIT_VIDEO;
+			   if (SDL_Init(initFlags) != 0) {
+					   printf("SDL_Init failed: %s\n", SDL_GetError());
+					   Exit();
+					   return;
+			   }
+			   std::cout << "Creating window..." << std::endl;
+			   m_window = SDL_CreateWindow("Demo-SDL", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 720, SDL_WINDOW_SHOWN);
+			   if (m_window == nullptr) {
+					   printf("SDL_CreateWindow failed: %s\n", SDL_GetError());
+					   Exit();
+					   return;
+			   }
+			   std::cout << "Creating renderer..." << std::endl;
+			   m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+			   if (m_renderer == nullptr) {
+					   printf("SDL_CreateRenderer failed: %s\n", SDL_GetError());
+					   Exit();
+					   return;
+			   }
+			   int imgFlags = IMG_INIT_PNG;
+			   if ((IMG_Init(imgFlags) & imgFlags) != imgFlags) {
+					   printf("SDL_image initialization failed: %s\n", IMG_GetError());
+					   Exit();
+					   return;
+			   }
+			   printf("SDL_image initialized successfully.\n");
+			   printf("Application initialized successfully.\n");
+			   m_initialized = true;
+	   }
 }
 
 void Application::Destroy() {
-	if (m_initialized) {
-		if (m_renderer) {
-			SDL_DestroyRenderer(m_renderer);
-			m_renderer = nullptr;
-		}
-		if (m_window) {
-			SDL_DestroyWindow(m_window);
-			m_window = nullptr;
-		}
-		SDL_Quit();
-		m_initialized = false;
-	}
+	   if (m_renderer != nullptr) {
+			   SDL_DestroyRenderer(m_renderer);
+			   m_renderer = nullptr;
+	   }
+	   if (m_window != nullptr) {
+			   SDL_DestroyWindow(m_window);
+			   m_window = nullptr;
+	   }
+	   SDL_Quit();
+	   m_initialized = false;
 }
 
 void Application::Loop() {
@@ -67,6 +68,7 @@ void Application::Loop() {
 		while (SDL_PollEvent(&event)) {
 			if (event.type == SDL_QUIT) {
 				m_initialized = false;
+				Exit();
 				return;
 			}
 		}

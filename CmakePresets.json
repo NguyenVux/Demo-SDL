@@ -7,7 +7,9 @@
 			"displayName": "SDL2 Native Base",
 			"binaryDir": "build",
 			"generator": "Ninja Multi-Config",
-			"cacheVariables": {}
+			"cacheVariables": {
+				"BUILD_SHARED_LIBS": "ON"
+			}
 		},
 		{
 			"name": "emscripten",

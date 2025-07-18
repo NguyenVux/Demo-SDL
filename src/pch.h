@@ -4,9 +4,9 @@
 #include <iostream>
 #ifdef __EMSCRIPTEN__ 
 #include <emscripten.h>
-#include <SDL2/SDL_image.h>
 #endif // __EMSCRIPTEN__
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 
 #ifndef NDEBUG
 #define ASSERT(condition,message) if(!(condition)) fprintf(stderr, "%s\n", message);
