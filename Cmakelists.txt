@@ -48,7 +48,8 @@ if(EMSCRIPTEN)
     )
 else()
     find_package(SDL2 REQUIRED CONFIG)
-    LIST(APPEND LINK_LIBRARIES ${SDL2_LIBRARIES})
+    find_package(SDL2_image REQUIRED CONFIG)
+    LIST(APPEND LINK_LIBRARIES SDL2::SDL2 SDL2::SDL2main SDL2_image::SDL2_image)
 endif()
 
 
