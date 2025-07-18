@@ -25,14 +25,14 @@ void Application::Init() {
 			SDL_Quit();
 			return;
 		}
-#endif // __EMSCRIPTEN__ 
 		int imgFlags = IMG_INIT_PNG;
 		if (IMG_Init(imgFlags) & imgFlags) {
 			printf("SDL_image initialized successfully.\n");
 		}
 		else {
 			emscripten_cancel_main_loop();
-		}
+		}		
+#endif // __EMSCRIPTEN__ 
 		m_initialized = true;
 	}
 }

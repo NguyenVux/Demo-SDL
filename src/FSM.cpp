@@ -18,7 +18,6 @@ void FSM::AddState(int stateID, std::unique_ptr<IState>&& state) {
 
 void FSM::RequestStateChange(int stateID) {
 	if (m_stateMap.find(stateID) == m_stateMap.end()) {
-		ASSERT("Cannot find state")
 		return;
 	}
 	m_nextStateID = stateID;

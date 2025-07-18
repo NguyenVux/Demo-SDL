@@ -1,0 +1,33 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "CMake: build emscripten-debug",
+            "type": "shell",
+            "command": "cmake --build build/emscripten --config Debug",
+            "group": "build",
+            "problemMatcher": ["$gcc"]
+        },
+        {
+            "label": "CMake: build emscripten-release",
+            "type": "shell",
+            "command": "cmake --build build/emscripten --config Release",
+            "group": "build",
+            "problemMatcher": ["$gcc"]
+        },
+        {
+            "label": "CMake: build sdl2-debug",
+            "type": "shell",
+            "command": "cmake --build build/sdl2 --config Debug",
+            "group": "build",
+            "problemMatcher": ["$gcc"]
+        },
+        {
+            "label": "CMake: build sdl2-release",
+            "type": "shell",
+            "command": "cmake --build build/sdl2 --config Release",
+            "group": "build",
+            "problemMatcher": ["$gcc"]
+        }
+    ]
+}

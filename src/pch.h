@@ -3,13 +3,12 @@
 #include <memory>
 #ifdef __EMSCRIPTEN__ 
 #include <emscripten.h>
-#include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-#endif
+#endif // __EMSCRIPTEN__
+#include <SDL2/SDL.h>
 
 #ifndef NDEBUG
 #define ASSERT(condition,message) if(!(condition)) fprintf(stderr, "%s\n", message);
-#define ASSERT(message) fprintf(stderr, "%s\n", message);
 #else
 #define ASSERT(condition,message)
 #define ASSERT(condition)

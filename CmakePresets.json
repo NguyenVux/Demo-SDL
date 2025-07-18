@@ -1,50 +1,40 @@
-{	    
-    "$schema": "https://raw.githubusercontent.com/Kitware/CMake/master/Help/manual/presets/schema.json",
-    "version": 10,
-    "cmakeMinimumRequired": {
-        "major": 3,
-        "minor": 21,
-        "patch": 0
+{
+  "$schema": "https://raw.githubusercontent.com/Kitware/CMake/master/Help/manual/presets/schema.json",
+  "version": 10,
+  "configurePresets": [
+    {
+      "name": "sdl2-native",
+      "displayName": "SDL2 Native Base",
+      "binaryDir": "build/sdl2",
+      "generator": "Ninja Multi-Config",
+      "cacheVariables": {
+        "CMAKE_PREFIX_PATH": "D:/personal/dev"
+      },
+      "architecture": {
+        "value": "x64"
+      }
     },
-    "configurePresets": [
-        {
-            "name": "baseConfig",
-            "displayName": "Emscripten base",
-            "binaryDir": "build",
-            "generator": "Ninja",
-            "toolchainFile": "emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake",
-            "cacheVariables": {
-            }
-        },
-        {
-            "name": "Debug",
-            "displayName": "Emscripten Debug",
-            "inherits": "baseConfig",
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Debug"
-            }
-        },
-        {
-            "name": "Release",            
-            "displayName": "Emscripten Release",
-            "inherits": "baseConfig",
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Release"
-            }
-        }
-
-
-    ],
-    "buildPresets": [
-        {
-            "name": "Debug",
-            "configurePreset": "Debug",
-            "configuration": "Debug"
-        },
-        {
-            "name": "Release",
-            "configurePreset": "Release",
-            "configuration": "Release"
-        }
-    ]
+    {
+      "name": "emscripten",
+      "displayName": "Emscripten Base",
+      "binaryDir": "build/emscripten",
+      "generator": "Ninja Multi-Config",
+      "toolchainFile": "emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake",
+      "cacheVariables": {}
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "Debug",
+      "displayName": "Debug",
+      "configurePreset": "sdl2-native",
+      "configuration": "Debug"
+    },
+    {
+      "name": "Release",
+      "configurePreset": "sdl2-native",
+      "displayName": "Release",
+      "configuration": "Release"
+    }
+  ]
 }

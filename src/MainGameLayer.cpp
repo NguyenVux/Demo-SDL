@@ -65,11 +65,13 @@ MainGameLayer::~MainGameLayer() {
 void MainGameLayer::Init()
 {
 	printf("MainGameLayer::Init\n");
+#ifdef __EMSCRIPTEN__
 	SDL_Texture *txt = IMG_LoadTexture(m_app->GetRenderer(), "assets/test.png");
 	if (txt == nullptr) {
 		printf("Failed to load texture! SDL_image Error: %s\n", IMG_GetError());
 		emscripten_cancel_main_loop();
 	}
-	anim = new Animation(txt);
+#endif //__EMSCRIPTEN__
+	anim = new Animation(nullptr);
 	anim->Play();
 }
