@@ -2,9 +2,11 @@
 #include <memory>
 #include "ILayer.h"
 #include "LayerStack.h"
+#include "AssetsManager.h"
 
 class SDL_Window;
 class SDL_Renderer;
+class FSM;
 
 class Application {
 public:
@@ -18,12 +20,16 @@ public:
 	SDL_Renderer* GetRenderer() const;
 	LayerStack& GetLayerStack();
 	const LayerStack& GetLayerStack() const;
+	AssetsManager& GetAssetsManager() const;
 	const bool IsExiting() const { return m_isExiting; }
 	void Exit() { m_isExiting = true; }
+	void LoadAssets();
 private:
+	std::unique_ptr<FSM> m_fsm;
 	LayerStack m_layerStack;
-	bool m_initialized;
 	SDL_Window* m_window;
 	SDL_Renderer* m_renderer;
+	std::unique_ptr<AssetsManager> m_assetManager;
+	bool m_initialized;
 	bool m_isExiting;
 };

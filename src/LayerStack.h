@@ -9,14 +9,15 @@ public:
 	~LayerStack();
 	
 	void AddLayer(std::unique_ptr<ILayer> layer);
+	ILayer* GetLayerByID(int id);
 	void RemoveLayer(ILayer* layer);
 	void Clear();
 	
 	void PreFrame();
 	void Update();
-	void Render();
+	void FlushCommandQueue();
 	void PostFrame();
-	
+
 	size_t GetLayerCount() const;
 	bool IsEmpty() const;
 

@@ -13,6 +13,8 @@ set(GAME_SOURCES
     ${CMAKE_SOURCE_DIR}/src/IState.h
     ${CMAKE_SOURCE_DIR}/src/Application.cpp
     ${CMAKE_SOURCE_DIR}/src/Application.h
+    ${CMAKE_SOURCE_DIR}/src/AssetsManager.cpp
+    ${CMAKE_SOURCE_DIR}/src/AssetsManager.h
     ${CMAKE_SOURCE_DIR}/src/DebugLayer.cpp
     ${CMAKE_SOURCE_DIR}/src/DebugLayer.h
     ${CMAKE_SOURCE_DIR}/src/ILayer.h
@@ -24,6 +26,8 @@ set(GAME_SOURCES
     ${CMAKE_SOURCE_DIR}/src/Animation.cpp
     ${CMAKE_SOURCE_DIR}/src/LayerStack.cpp
     ${CMAKE_SOURCE_DIR}/src/LayerStack.h
+    ${CMAKE_SOURCE_DIR}/src/RenderQueue.h
+    ${CMAKE_SOURCE_DIR}/src/RenderQueue.cpp
 )
 
 LIST(APPEND LINK_OPTIONS)

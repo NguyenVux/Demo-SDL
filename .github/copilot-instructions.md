@@ -18,6 +18,7 @@
 - Prefer `emplace_back` over `push_back` for better performance.
 - Check comments for TODOs and FIXMEs, they are important for the codebase.
 - Check comments for context, they are important for understanding the codebase.
+- For struct memvber variables are named without prefix, and must be in PascalCase.
 # Rules
 - must ask if lacking information
 - must ask if not sure about the implementation
@@ -28,4 +29,5 @@
 - do not suggest code that has been deleted
 - answer honestly, brutal facts, no sugar coating and do not fabricate information
 - do not suggest code that is not related to the context
+- When adding new source files, ensure they are added to the CMakeLists.txt file.
 

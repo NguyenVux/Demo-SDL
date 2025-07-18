@@ -30,7 +30,7 @@ void init()
 	std::cout << "Initializing application..." << std::endl;
 	app.AddLayer(std::make_unique<MainGameLayer>(&app));
 #ifndef NDEBUG
-	app.AddLayer(std::make_unique<DebugLayer>());
+	app.AddLayer(std::make_unique<DebugLayer>(&app));
 #endif // NDEBUG
 }
 

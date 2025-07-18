@@ -16,6 +16,9 @@ public:
 	   void Update();
 	   void Render();
 	   void PostFrame();
+	   bool HasState(int stateID) const {
+		   return m_stateMap.find(stateID) != m_stateMap.end();
+	   }
 private:
 	   void ChangeState(int stateID);
 	   std::unordered_map<int, std::unique_ptr<IState>> m_stateMap;

@@ -15,6 +15,19 @@ void LayerStack::AddLayer(std::unique_ptr<ILayer> layer) {
 	}
 }
 
+ILayer* LayerStack::GetLayerByID(int id)
+{
+	for(auto& layer : m_layers)
+	{
+		if(layer == nullptr || layer->GetID() != id)
+		{
+			continue;
+		}
+		return layer.get();
+	}
+	return nullptr;
+}
+
 void LayerStack::RemoveLayer(ILayer* layer) {
 	if (layer == nullptr) {
 		return;
@@ -43,6 +56,9 @@ void LayerStack::Clear() {
 void LayerStack::PreFrame() {
 	for (auto& layer : m_layers) {
 		if (layer != nullptr) {
+			if(!layer->IsEnabled()) {
+				continue;
+			}
 			layer->PreFrame();
 		}
 	}
@@ -59,10 +75,14 @@ void LayerStack::Update() {
 	}
 }
 
-void LayerStack::Render() {
+void LayerStack::FlushCommandQueue() {
 	for (auto& layer : m_layers) {
 		if (layer != nullptr) {
-			layer->Render();
+			if(!layer->IsEnabled()) {
+				layer->GetRenderQueue().Clear();
+				continue;
+			}
+			layer->FlushCommandQueue();
 		}
 	}
 }
@@ -70,6 +90,9 @@ void LayerStack::Render() {
 void LayerStack::PostFrame() {
 	for (auto& layer : m_layers) {
 		if (layer != nullptr) {
+			if(!layer->IsEnabled()) {
+				continue;
+			}
 			layer->PostFrame();
 		}
 	}
