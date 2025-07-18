@@ -5,19 +5,17 @@
     {
       "name": "sdl2-native",
       "displayName": "SDL2 Native Base",
-      "binaryDir": "build/sdl2",
+      "binaryDir": "build",
       "generator": "Ninja Multi-Config",
       "cacheVariables": {
-        "CMAKE_PREFIX_PATH": "D:/personal/dev"
-      },
-      "architecture": {
-        "value": "x64"
+        "CMAKE_PREFIX_PATH": "D:/personal/dev",
+		"CMAKE_BUILD_TYPE": "Debug"
       }
     },
     {
       "name": "emscripten",
       "displayName": "Emscripten Base",
-      "binaryDir": "build/emscripten",
+      "binaryDir": "build",
       "generator": "Ninja Multi-Config",
       "toolchainFile": "emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake",
       "cacheVariables": {}
@@ -26,15 +24,31 @@
   "buildPresets": [
     {
       "name": "Debug",
-      "displayName": "Debug",
-      "configurePreset": "sdl2-native",
-      "configuration": "Debug"
+      "displayName": "Debug"
     },
     {
       "name": "Release",
-      "configurePreset": "sdl2-native",
-      "displayName": "Release",
-      "configuration": "Release"
+      "displayName": "Release"
+    },
+    {
+      "name": "Native Debug",
+      "inherits": ["Debug"],
+      "configurePreset": "sdl2-native"
+    },
+    {
+      "name": "Native Release",
+      "inherits": ["Release"],
+      "configurePreset": "sdl2-native"
+    },
+    {
+      "name": "Emscripten Debug",
+      "inherits": ["Debug"],
+      "configurePreset": "emscripten"
+    },
+    {
+      "name": "Emscripten Release",
+      "inherits": ["Release"],
+      "configurePreset": "emscripten"
     }
   ]
 }

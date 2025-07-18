@@ -8,23 +8,30 @@ void Application::AddLayer(std::unique_ptr<ILayer> layer) {
 }
 
 void Application::Init() {
+	std::cout << "Application::Init() called" << std::endl;
 	if (!m_initialized) {
-#ifdef __EMSCRIPTEN__ 
+		std::cout << "Initializing SDL..." << std::endl;
 		if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+			printf("SDL_Init failed: %s\n", SDL_GetError());
 			return;
 		}
+		std::cout << "Creating window..." << std::endl;
 		m_window = SDL_CreateWindow("Demo-SDL", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 720, SDL_WINDOW_SHOWN);
 		if (!m_window) {
+			printf("SDL_CreateWindow failed: %s\n", SDL_GetError());
 			SDL_Quit();
 			return;
 		}
+		std::cout << "Creating renderer..." << std::endl;
 		m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 		if (!m_renderer) {
+			printf("SDL_CreateRenderer failed: %s\n", SDL_GetError());
 			SDL_DestroyWindow(m_window);
 			m_window = nullptr;
 			SDL_Quit();
 			return;
 		}
+#ifdef __EMSCRIPTEN__
 		int imgFlags = IMG_INIT_PNG;
 		if (IMG_Init(imgFlags) & imgFlags) {
 			printf("SDL_image initialized successfully.\n");
@@ -33,13 +40,13 @@ void Application::Init() {
 			emscripten_cancel_main_loop();
 		}		
 #endif // __EMSCRIPTEN__ 
+		printf("Application initialized successfully.\n");
 		m_initialized = true;
 	}
 }
 
 void Application::Destroy() {
 	if (m_initialized) {
-		#ifdef __EMSCRIPTEN__ 
 		if (m_renderer) {
 			SDL_DestroyRenderer(m_renderer);
 			m_renderer = nullptr;
@@ -49,23 +56,30 @@ void Application::Destroy() {
 			m_window = nullptr;
 		}
 		SDL_Quit();
-		#endif // __EMSCRIPTEN__ 
 		m_initialized = false;
 	}
 }
 
 void Application::Loop() {
 	if (m_initialized) {
-#ifdef __EMSCRIPTEN__ 
+		// Handle SDL events
+		SDL_Event event;
+		while (SDL_PollEvent(&event)) {
+			if (event.type == SDL_QUIT) {
+				m_initialized = false;
+				return;
+			}
+		}
+		
 		SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, 255);
 		SDL_RenderClear(m_renderer);
-#endif // __EMSCRIPTEN__
+		
 		m_layerStack.PreFrame();
 		m_layerStack.Update();
 		m_layerStack.Render();
-#ifdef __EMSCRIPTEN__
+		
 		SDL_RenderPresent(m_renderer);
-#endif // __EMSCRIPTEN__
+		
 		m_layerStack.PostFrame();
 	}
 }

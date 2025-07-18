@@ -47,14 +47,13 @@ if(EMSCRIPTEN)
         --use-preload-plugins
     )
 else()
-    find_package(SDL2 REQUIRED)
-    LIST(APPEND LINK_LIBRARIES SDL2::SDL2)
+    find_package(SDL2 REQUIRED CONFIG)
+    LIST(APPEND LINK_LIBRARIES ${SDL2_LIBRARIES})
 endif()
 
 
-# add_executable(DemoSDL ${CMAKE_SOURCE_DIR}/src/main.cpp)
 add_executable(DemoSDL ${GAME_SOURCES})
 target_link_libraries(DemoSDL PRIVATE ${LINK_LIBRARIES})
 target_precompile_headers(DemoSDL PRIVATE "${CMAKE_SOURCE_DIR}/src/pch.h")
-# target_compile_options(DemoSDL PRIVATE ${COMPILE_OPTIONS})
-# target_link_options(DemoSDL PRIVATE ${LINK_OPTIONS})
+target_compile_options(DemoSDL PRIVATE ${COMPILE_OPTIONS})
+target_link_options(DemoSDL PRIVATE ${LINK_OPTIONS})

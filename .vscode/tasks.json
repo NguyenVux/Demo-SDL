@@ -18,14 +18,14 @@
         {
             "label": "CMake: build sdl2-debug",
             "type": "shell",
-            "command": "cmake --build build/sdl2 --config Debug",
+            "command": "cmake --build build --config Debug",
             "group": "build",
             "problemMatcher": ["$gcc"]
         },
         {
             "label": "CMake: build sdl2-release",
             "type": "shell",
-            "command": "cmake --build build/sdl2 --config Release",
+            "command": "cmake --build build --config Release",
             "group": "build",
             "problemMatcher": ["$gcc"]
         }
