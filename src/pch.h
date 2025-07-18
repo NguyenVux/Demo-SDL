@@ -20,3 +20,4 @@
 #include "Time.h"
 #include "Application.h"
 #include "Animation.h"
+#include "AssetsManager.h"

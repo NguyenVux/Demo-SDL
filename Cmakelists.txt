@@ -25,6 +25,8 @@ add_executable(DemoSDL
     "${CMAKE_SOURCE_DIR}/src/Time.cpp"
     "${CMAKE_SOURCE_DIR}/src/Animation.h"
     "${CMAKE_SOURCE_DIR}/src/Animation.cpp"
+    "${CMAKE_SOURCE_DIR}/src/AssetsManager.h"
+    "${CMAKE_SOURCE_DIR}/src/AssetsManager.cpp"
 )
 target_link_libraries(DemoSDL PRIVATE box2d::box2d)
 target_precompile_headers(DemoSDL PRIVATE "${CMAKE_SOURCE_DIR}/src/pch.h")
