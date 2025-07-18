@@ -50,8 +50,8 @@ void MainGameLayer::Render() {
 	SDL_Rect boxRect = { static_cast<int>(position.x), static_cast<int>(position.y), 50, 50 };
 	SDL_RenderFillRect(m_app->GetRenderer(), &boxRect);
 	
-	SDL_Rect srcRect = { 120*anim->m_currentFrame, 0, 120, 80 };
-	SDL_Rect dstRect = { static_cast<int>(position.x), static_cast<int>(position.y), 240, 160 };
+	SDL_Rect srcRect = { 94, 1, 23, 39 };
+	SDL_Rect dstRect = { static_cast<int>(position.x), static_cast<int>(position.y), 46, 78 };
 	SDL_RenderCopy(m_app->GetRenderer(), anim->m_texture, &srcRect, &dstRect);
 }
 void MainGameLayer::PostFrame() {
@@ -65,7 +65,7 @@ MainGameLayer::~MainGameLayer() {
 void MainGameLayer::Init()
 {
 	printf("MainGameLayer::Init\n");
-	SDL_Texture *txt = IMG_LoadTexture(m_app->GetRenderer(), "assets/player/_Idle.png");
+	SDL_Texture *txt = IMG_LoadTexture(m_app->GetRenderer(), "assets/test.png");
 	if (txt == nullptr) {
 		printf("Failed to load texture! SDL_image Error: %s\n", IMG_GetError());
 		emscripten_cancel_main_loop();

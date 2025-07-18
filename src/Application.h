@@ -1,10 +1,10 @@
 #pragma once
 #include <vector>
 #include <memory>
-#ifdef EMSCRIPTEN
-#include <SDL.h>
-#endif
 #include "ILayer.h"
+
+class SDL_Window;
+class SDL_Renderer;
 
 class Application {
 public:

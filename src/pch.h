@@ -1,7 +1,7 @@
 #pragma once
 #include <stdio.h>
 #include <memory>
-#ifdef EMSCRIPTEN
+#ifdef __EMSCRIPTEN__ 
 #include <emscripten.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>

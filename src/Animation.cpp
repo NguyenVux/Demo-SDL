@@ -8,7 +8,7 @@ Animation::Animation(SDL_Texture* texture) :
 	m_fps(5), 
 	m_isPlaying(false)
 {
-	m_frames.assign(10, 1);
+	m_frames.assign(1, 1);
 }
 
 void Animation::Update() {

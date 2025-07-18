@@ -10,7 +10,7 @@ void Application::AddLayer(std::unique_ptr<ILayer> layer) {
 
 void Application::Init() {
 	if (!m_initialized) {
-#ifdef EMSCRIPTEN
+#ifdef __EMSCRIPTEN__ 
 		if (SDL_Init(SDL_INIT_VIDEO) != 0) {
 			return;
 		}
@@ -26,7 +26,7 @@ void Application::Init() {
 			SDL_Quit();
 			return;
 		}
-#endif // EMSCRIPTEN
+#endif // __EMSCRIPTEN__ 
 		int imgFlags = IMG_INIT_PNG;
 		if (IMG_Init(imgFlags) & imgFlags) {
 			printf("SDL_image initialized successfully.\n");
@@ -40,7 +40,7 @@ void Application::Init() {
 
 void Application::Destroy() {
 	if (m_initialized) {
-		#ifdef EMSCRIPTEN
+		#ifdef __EMSCRIPTEN__ 
 		if (m_renderer) {
 			SDL_DestroyRenderer(m_renderer);
 			m_renderer = nullptr;
@@ -50,25 +50,25 @@ void Application::Destroy() {
 			m_window = nullptr;
 		}
 		SDL_Quit();
-		#endif
+		#endif // __EMSCRIPTEN__ 
 		m_initialized = false;
 	}
 }
 
 void Application::Loop() {
 	if (m_initialized) {
-		#ifdef EMSCRIPTEN
+		#ifdef __EMSCRIPTEN__ 
 		SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, 255);
 		SDL_RenderClear(m_renderer);
-		#endif
+		#endif // __EMSCRIPTEN__ 
 		for (auto& layer : m_layers) {
 			layer->PreFrame();
 			layer->Update();
 			layer->Render();
 		}
-		#ifdef EMSCRIPTEN
+		#ifdef __EMSCRIPTEN__ 
 		SDL_RenderPresent(m_renderer);
-		#endif
+		#endif // __EMSCRIPTEN__ 
 		for (auto& layer : m_layers) {
 			layer->PostFrame();
 		}

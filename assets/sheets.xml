@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker https://www.codeandweb.com/texturepacker -->
+<!-- $TexturePacker:SmartUpdate:42ff9c84e6ad1329a9c548bc73d718b3:64e3893151b2be24f7d98f4ac8cc09c7:e5957bd0ebb7555f5162167d41e95f0e$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+pX => x pos of the pivot point (relative to sprite width)
+pY => y pos of the pivot point (relative to sprite height)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+with polygon mode enabled:
+vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
+verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
+triangles  => sprite triangulation, 3 vertex indices per triangle
+-->
+<TextureAtlas imagePath="sheets.png" width="2000" height="720">
+    <sprite n="_Attack.png" x="1200" y="80" w="80" h="480" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="_Attack2.png" x="960" y="560" w="720" h="80" pX="0.5" pY="0.5"/>
+    <sprite n="_Attack2NoMovement.png" x="1920" y="0" w="80" h="720" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="_AttackCombo.png" x="0" y="80" w="1200" h="80" pX="0.5" pY="0.5"/>
+    <sprite n="_AttackComboNoMovement.png" x="0" y="160" w="1200" h="80" pX="0.5" pY="0.5"/>
+    <sprite n="_AttackNoMovement.png" x="1280" y="80" w="80" h="480" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="_Crouch.png" x="1800" y="80" w="120" h="80" pX="0.5" pY="0.5"/>
+    <sprite n="_CrouchAll.png" x="1440" y="80" w="360" h="80" pX="0.5" pY="0.5"/>
+    <sprite n="_CrouchAttack.png" x="1360" y="80" w="80" h="480" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="_CrouchTransition.png" x="1800" y="160" w="120" h="80" pX="0.5" pY="0.5"/>
+    <sprite n="_CrouchWalk.png" x="0" y="560" w="960" h="80" pX="0.5" pY="0.5"/>
+    <sprite n="_Dash.png" x="1440" y="480" w="240" h="80" pX="0.5" pY="0.5"/>
+    <sprite n="_Death.png" x="0" y="240" w="1200" h="80" pX="0.5" pY="0.5"/>
+    <sprite n="_DeathNoMovement.png" x="0" y="320" w="1200" h="80" pX="0.5" pY="0.5"/>
+    <sprite n="_Fall.png" x="1440" y="160" w="360" h="80" pX="0.5" pY="0.5"/>
+    <sprite n="_Hit.png" x="1800" y="240" w="120" h="80" pX="0.5" pY="0.5"/>
+    <sprite n="_Idle.png" x="0" y="400" w="1200" h="80" pX="0.5" pY="0.5"/>
+    <sprite n="_Jump.png" x="1440" y="240" w="360" h="80" pX="0.5" pY="0.5"/>
+    <sprite n="_JumpFallInbetween.png" x="1680" y="480" w="80" h="240" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="_Roll.png" x="0" y="0" w="1440" h="80" pX="0.5" pY="0.5"/>
+    <sprite n="_Run.png" x="0" y="480" w="1200" h="80" pX="0.5" pY="0.5"/>
+    <sprite n="_Slide.png" x="1760" y="480" w="80" h="240" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="_SlideAll.png" x="1440" y="0" w="480" h="80" pX="0.5" pY="0.5"/>
+    <sprite n="_SlideTransitionEnd.png" x="1800" y="320" w="120" h="80" pX="0.5" pY="0.5"/>
+    <sprite n="_SlideTransitionStart.png" x="1800" y="400" w="120" h="80" pX="0.5" pY="0.5"/>
+    <sprite n="_TurnAround.png" x="1440" y="320" w="360" h="80" pX="0.5" pY="0.5"/>
+    <sprite n="_WallClimb.png" x="0" y="640" w="840" h="80" pX="0.5" pY="0.5"/>
+    <sprite n="_WallClimbNoMovement.png" x="840" y="640" w="840" h="80" pX="0.5" pY="0.5"/>
+    <sprite n="_WallHang.png" x="1840" y="480" w="80" h="120" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="_WallSlide.png" x="1440" y="400" w="360" h="80" pX="0.5" pY="0.5"/>
+</TextureAtlas>

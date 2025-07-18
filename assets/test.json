@@ -1,0 +1,180 @@
+{
+  "frames": [
+    {
+      "filename": "_Idle-0.png",
+      "frame": { "x": 94, "y": 1, "w": 23, "h": 39 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 43, "y": 41, "w": 23, "h": 39 },
+      "sourceSize": { "w": 120, "h": 80 }
+    },
+    {
+      "filename": "_Idle-1.png",
+      "frame": { "x": 1, "y": 56, "w": 23, "h": 39 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 43, "y": 41, "w": 23, "h": 39 },
+      "sourceSize": { "w": 120, "h": 80 }
+    },
+    {
+      "filename": "_Idle-2.png",
+      "frame": { "x": 42, "y": 75, "w": 23, "h": 39 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 43, "y": 41, "w": 23, "h": 39 },
+      "sourceSize": { "w": 120, "h": 80 }
+    },
+    {
+      "filename": "_Idle-3.png",
+      "frame": { "x": 1, "y": 81, "w": 23, "h": 39 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 43, "y": 41, "w": 23, "h": 39 },
+      "sourceSize": { "w": 120, "h": 80 }
+    },
+    {
+      "filename": "_Idle-4.png",
+      "frame": { "x": 42, "y": 100, "w": 23, "h": 39 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 43, "y": 41, "w": 23, "h": 39 },
+      "sourceSize": { "w": 120, "h": 80 }
+    },
+    {
+      "filename": "_Idle-5.png",
+      "frame": { "x": 1, "y": 106, "w": 23, "h": 39 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 43, "y": 41, "w": 23, "h": 39 },
+      "sourceSize": { "w": 120, "h": 80 }
+    },
+    {
+      "filename": "_Idle-6.png",
+      "frame": { "x": 42, "y": 125, "w": 23, "h": 39 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 43, "y": 41, "w": 23, "h": 39 },
+      "sourceSize": { "w": 120, "h": 80 }
+    },
+    {
+      "filename": "_Idle-7.png",
+      "frame": { "x": 1, "y": 131, "w": 23, "h": 39 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 43, "y": 41, "w": 23, "h": 39 },
+      "sourceSize": { "w": 120, "h": 80 }
+    },
+    {
+      "filename": "_Idle-8.png",
+      "frame": { "x": 94, "y": 1, "w": 23, "h": 39 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 43, "y": 41, "w": 23, "h": 39 },
+      "sourceSize": { "w": 120, "h": 80 }
+    },
+    {
+      "filename": "_Idle-9.png",
+      "frame": { "x": 94, "y": 1, "w": 23, "h": 39 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 43, "y": 41, "w": 23, "h": 39 },
+      "sourceSize": { "w": 120, "h": 80 }
+    },
+    {
+      "filename": "_Roll-0.png",
+      "frame": { "x": 45, "y": 47, "w": 26, "h": 39 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 49, "y": 40, "w": 26, "h": 39 },
+      "sourceSize": { "w": 120, "h": 80 }
+    },
+    {
+      "filename": "_Roll-1.png",
+      "frame": { "x": 86, "y": 73, "w": 38, "h": 31 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 43, "y": 45, "w": 38, "h": 31 },
+      "sourceSize": { "w": 120, "h": 80 }
+    },
+    {
+      "filename": "_Roll-2.png",
+      "frame": { "x": 1, "y": 28, "w": 42, "h": 26 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 43, "y": 47, "w": 42, "h": 26 },
+      "sourceSize": { "w": 120, "h": 80 }
+    },
+    {
+      "filename": "_Roll-3.png",
+      "frame": { "x": 48, "y": 1, "w": 44, "h": 21 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 42, "y": 48, "w": 44, "h": 21 },
+      "sourceSize": { "w": 120, "h": 80 }
+    },
+    {
+      "filename": "_Roll-4.png",
+      "frame": { "x": 48, "y": 24, "w": 43, "h": 21 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 42, "y": 48, "w": 43, "h": 21 },
+      "sourceSize": { "w": 120, "h": 80 }
+    },
+    {
+      "filename": "_Roll-5.png",
+      "frame": { "x": 1, "y": 1, "w": 45, "h": 25 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 41, "y": 49, "w": 45, "h": 25 },
+      "sourceSize": { "w": 120, "h": 80 }
+    },
+    {
+      "filename": "_Roll-6.png",
+      "frame": { "x": 52, "y": 150, "w": 30, "h": 32 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 46, "y": 48, "w": 30, "h": 32 },
+      "sourceSize": { "w": 120, "h": 80 }
+    },
+    {
+      "filename": "_Roll-7.png",
+      "frame": { "x": 1, "y": 156, "w": 25, "h": 27 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 52, "y": 53, "w": 25, "h": 27 },
+      "sourceSize": { "w": 120, "h": 80 }
+    },
+    {
+      "filename": "_Roll-8.png",
+      "frame": { "x": 28, "y": 156, "w": 27, "h": 22 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 54, "y": 58, "w": 27, "h": 22 },
+      "sourceSize": { "w": 120, "h": 80 }
+    },
+    {
+      "filename": "_Roll-9.png",
+      "frame": { "x": 84, "y": 143, "w": 27, "h": 21 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 48, "y": 59, "w": 27, "h": 21 },
+      "sourceSize": { "w": 120, "h": 80 }
+    },
+    {
+      "filename": "_Roll-10.png",
+      "frame": { "x": 93, "y": 42, "w": 24, "h": 29 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 48, "y": 51, "w": 24, "h": 29 },
+      "sourceSize": { "w": 120, "h": 80 }
+    },
+    {
+      "filename": "_Roll-11.png",
+      "frame": { "x": 83, "y": 113, "w": 28, "h": 34 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 45, "y": 46, "w": 28, "h": 34 },
+      "sourceSize": { "w": 120, "h": 80 }
+    }
+  ]
+}
