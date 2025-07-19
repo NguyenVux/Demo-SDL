@@ -11,11 +11,14 @@ enum class GameState : int {
 class DemoGameState : public IState
 {
 public:
+	SDL_Point pos;
+	bool facingLeft = false;
 	DemoGameState(Application* app) : 
 		m_app(app),
 		m_animationInstance(nullptr)
 	{
-
+		pos.x = 0;
+		pos.y = 720/2;
 	}
 	~DemoGameState() override = default;
 
@@ -36,6 +39,7 @@ public:
 
 	void Update() override {
 		m_animationInstance->Update();
+		pos.x = (pos.x + 60) %1280;
 	}
 
 	void Render() override {
@@ -45,8 +49,9 @@ public:
 			
 			RenderCommand command {
 				.Sprite = m_animationInstance->GetCurrentSprite(),
-				.DstRect {0,0,120,80},
-				.Angle = 0.0f
+				.DstRect {(float)pos.x,(float)pos.y,120 * 3,80 * 3},
+				.Angle = 0.0f,
+				.Flip = facingLeft?SDL_FLIP_HORIZONTAL:SDL_FLIP_NONE,
 			};
 			queue.Push(command);
 		}

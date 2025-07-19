@@ -17,6 +17,7 @@ public:
 	virtual void OnEnable() {};
 	virtual void Enable() { 
 		m_enabled = true; 
+		m_renderQueue.Clear();
 		OnEnable();
 	}
 	virtual void Disable() { 

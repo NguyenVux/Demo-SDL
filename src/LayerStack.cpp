@@ -79,7 +79,6 @@ void LayerStack::FlushCommandQueue() {
 	for (auto& layer : m_layers) {
 		if (layer != nullptr) {
 			if(!layer->IsEnabled()) {
-				layer->GetRenderQueue().Clear();
 				continue;
 			}
 			layer->FlushCommandQueue();

@@ -22,32 +22,24 @@
 	],
 	"buildPresets": [
 		{
-			"name": "Debug",
-			"displayName": "Debug"
-		},
-		{
-			"name": "Release",
-			"displayName": "Release"
-		},
-		{
 			"name": "Native Debug",
-			"inherits": ["Debug"],
-			"configurePreset": "sdl2-native"
+			"configurePreset": "sdl2-native",
+			"configuration": "Debug"
 		},
 		{
 			"name": "Native Release",
-			"inherits": ["Release"],
-			"configurePreset": "sdl2-native"
+			"configurePreset": "sdl2-native",
+			"configuration": "Realse"
 		},
 		{
 			"name": "Emscripten Debug",
-			"inherits": ["Debug"],
-			"configurePreset": "emscripten"
+			"configurePreset": "emscripten",
+			"configuration": "Debug"
 		},
 		{
 			"name": "Emscripten Release",
-			"inherits": ["Release"],
-			"configurePreset": "emscripten"
+			"configurePreset": "emscripten",
+			"configuration": "Release"
 		}
 	]
 }

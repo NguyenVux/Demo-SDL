@@ -4,6 +4,7 @@
 #include <iostream>
 #ifdef __EMSCRIPTEN__ 
 #include <emscripten.h>
+#include <float.h>
 #endif // __EMSCRIPTEN__
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
