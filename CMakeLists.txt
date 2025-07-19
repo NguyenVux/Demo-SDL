@@ -28,6 +28,8 @@ set(GAME_SOURCES
     ${CMAKE_SOURCE_DIR}/src/LayerStack.h
     ${CMAKE_SOURCE_DIR}/src/RenderQueue.h
     ${CMAKE_SOURCE_DIR}/src/RenderQueue.cpp
+    ${CMAKE_SOURCE_DIR}/src/BaseChar.h
+    ${CMAKE_SOURCE_DIR}/src/BaseChar.cpp
 )
 
 LIST(APPEND LINK_OPTIONS)

@@ -3,22 +3,19 @@
 #include "Application.h"
 #include <stdexcept>
 #include <format>
-#include <span>
-
+#include "BaseChar.h"
 enum class GameState : int {
 	GAMEPLAY_STATE = 0
 };
 class DemoGameState : public IState
 {
 public:
-	SDL_Point pos;
 	bool facingLeft = false;
+	BaseChar m_char;
 	DemoGameState(Application* app) : 
 		m_app(app),
 		m_animationInstance(nullptr)
 	{
-		pos.x = 0;
-		pos.y = 720/2;
 	}
 	~DemoGameState() override = default;
 
@@ -39,21 +36,31 @@ public:
 
 	void Update() override {
 		m_animationInstance->Update();
-		pos.x = (pos.x + 60) %1280;
+		int size;
+		const uint8_t* keyState = SDL_GetKeyboardState(&size);
+		if(keyState[SDL_Scancode::SDL_SCANCODE_RIGHT])
+		{
+			m_char.Move(Direction::RIGHT);
+		}
+		if(keyState[SDL_Scancode::SDL_SCANCODE_LEFT])
+		{
+			m_char.Move(Direction::LEFT);
+		}
 	}
 
 	void Render() override {
 		ILayer* layer = m_app->GetLayerStack().GetLayerByID(LayerID::GAMELAYER_ID);
+		SDL_FPoint pos = m_char.GetPosition();
 		if (layer) {
 			RenderQueue& queue = layer->GetRenderQueue();
 			const Sprite* sprite = m_animationInstance->GetCurrentSprite();
-			if(sprite == nullptr)
+			if(sprite != nullptr)
 			{
 				RenderCommand command {
-					.Sprite = ,
+					.Sprite = sprite,
 					.DstRect {(float)pos.x,(float)pos.y,120 * 3,80 * 3},
 					.Angle = 0.0f,
-					.Flip = facingLeft?SDL_FLIP_HORIZONTAL:SDL_FLIP_NONE,
+					.Flip = m_char.GetLookDirection() == Direction::LEFT?SDL_FLIP_HORIZONTAL:SDL_FLIP_NONE,
 				};
 				queue.Push(command);
 			}
@@ -62,10 +69,10 @@ public:
 		if (layer) {
 			RenderQueue& queue = layer->GetRenderQueue();
 			const Sprite* sprite = m_animationInstance->GetCurrentSprite();
-			if(sprite == nullptr)
+			if(sprite != nullptr)
 			{
 				RenderCommand command {
-					.Sprite = spite,
+					.Sprite = sprite,
 					.DstRect {0,0,60,40},
 					.Angle = 0.0f,
 					.Flip = SDL_FLIP_HORIZONTAL
