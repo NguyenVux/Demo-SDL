@@ -4,7 +4,7 @@
 
 void AnimationInstance::Update()
 {
-	if (!m_isPlaying)
+	if (!m_isPlaying || m_animation->GetLength() < 1)
 	{
 		return;
 	}

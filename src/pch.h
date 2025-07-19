@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <memory>
 #include <iostream>
+#include <algorithm>
 #ifdef __EMSCRIPTEN__ 
 #include <emscripten.h>
 #include <float.h>

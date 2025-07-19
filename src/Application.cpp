@@ -46,26 +46,32 @@ public:
 		ILayer* layer = m_app->GetLayerStack().GetLayerByID(LayerID::GAMELAYER_ID);
 		if (layer) {
 			RenderQueue& queue = layer->GetRenderQueue();
-			
-			RenderCommand command {
-				.Sprite = m_animationInstance->GetCurrentSprite(),
-				.DstRect {(float)pos.x,(float)pos.y,120 * 3,80 * 3},
-				.Angle = 0.0f,
-				.Flip = facingLeft?SDL_FLIP_HORIZONTAL:SDL_FLIP_NONE,
-			};
-			queue.Push(command);
+			const Sprite* sprite = m_animationInstance->GetCurrentSprite();
+			if(sprite == nullptr)
+			{
+				RenderCommand command {
+					.Sprite = ,
+					.DstRect {(float)pos.x,(float)pos.y,120 * 3,80 * 3},
+					.Angle = 0.0f,
+					.Flip = facingLeft?SDL_FLIP_HORIZONTAL:SDL_FLIP_NONE,
+				};
+				queue.Push(command);
+			}
 		}
 		layer = m_app->GetLayerStack().GetLayerByID(LayerID::DEBUG_ID);
 		if (layer) {
 			RenderQueue& queue = layer->GetRenderQueue();
-			
-			RenderCommand command {
-				.Sprite = m_animationInstance->GetCurrentSprite(),
-				.DstRect {0,0,60,40},
-				.Angle = 0.0f,
-				.Flip = SDL_FLIP_HORIZONTAL
-			};
-			queue.Push(command);
+			const Sprite* sprite = m_animationInstance->GetCurrentSprite();
+			if(sprite == nullptr)
+			{
+				RenderCommand command {
+					.Sprite = spite,
+					.DstRect {0,0,60,40},
+					.Angle = 0.0f,
+					.Flip = SDL_FLIP_HORIZONTAL
+				};
+				queue.Push(command);
+			}
 		}
 		// TODO: Add rendering logic for the demo game state
 	}
