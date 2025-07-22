@@ -3,12 +3,12 @@
 
 
 
-
 BaseChar::BaseChar() :
-	m_speed(20.0f),
+	m_speed(2.5f),
+	m_scale(1.0f),
+	m_currentState(CharacterState::IDLE),
 	m_lookDirection(Direction::RIGHT)
 {
-
 	m_normOrigin = {
 		0.5f,
 		0.0f
@@ -19,6 +19,15 @@ BaseChar::BaseChar() :
 	};
 }
 
+
+void BaseChar::SetState(CharacterState state) {
+	if (m_currentState == state) return;
+
+}
+
+void BaseChar::Update(float deltaTime) {
+
+}
 
 void BaseChar::Render(const RenderQueue& queue)
 {
@@ -49,4 +58,10 @@ void BaseChar::Move(Direction direction)
 			}
 			break;
 	}
+	m_currentState = CharacterState::MOVING;
+}
+
+void BaseChar::Idle()
+{
+	m_currentState = CharacterState::IDLE;
 }

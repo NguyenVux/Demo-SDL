@@ -24,8 +24,8 @@ public:
 	const bool IsExiting() const { return m_isExiting; }
 	void Exit() { m_isExiting = true; }
 	void LoadAssets();
-private:
 	std::unique_ptr<FSM> m_fsm;
+private:
 	LayerStack m_layerStack;
 	SDL_Window* m_window;
 	SDL_Renderer* m_renderer;

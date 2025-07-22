@@ -5,8 +5,8 @@ class FSM;
 
 class IState {
 public:
-	IState() 
-		: m_fsm(nullptr)
+	IState(FSM* fsm) 
+		: m_fsm(fsm)
 	{
 	}
 	virtual void Enter() {}

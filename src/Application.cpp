@@ -10,84 +10,36 @@ enum class GameState : int {
 class DemoGameState : public IState
 {
 public:
-	bool facingLeft = false;
-	BaseChar m_char;
 	DemoGameState(Application* app) : 
-		m_app(app),
-		m_animationInstance(nullptr)
+		IState(m_app->m_fsm.get()),
+		m_app(app)
 	{
 	}
 	~DemoGameState() override = default;
 
 	void Enter() override {
-		// TODO: Add logic for entering the demo game state
-		m_animationInstance = std::make_unique<AnimationInstance>(m_app->GetAssetsManager().GetAnimation("run"));
-		m_animationInstance->Play();
 	}
 
 	void Exit() override {
-		// TODO: Add logic for exiting the demo game state
-		m_animationInstance.reset();
+		
 	}
 
 	void PreFrame() override {
-		// TODO: Add logic before frame update
+		
 	}
 
 	void Update() override {
-		m_animationInstance->Update();
-		int size;
-		const uint8_t* keyState = SDL_GetKeyboardState(&size);
-		if(keyState[SDL_Scancode::SDL_SCANCODE_RIGHT])
-		{
-			m_char.Move(Direction::RIGHT);
-		}
-		if(keyState[SDL_Scancode::SDL_SCANCODE_LEFT])
-		{
-			m_char.Move(Direction::LEFT);
-		}
+
 	}
 
 	void Render() override {
-		ILayer* layer = m_app->GetLayerStack().GetLayerByID(LayerID::GAMELAYER_ID);
-		SDL_FPoint pos = m_char.GetPosition();
-		if (layer) {
-			RenderQueue& queue = layer->GetRenderQueue();
-			const Sprite* sprite = m_animationInstance->GetCurrentSprite();
-			if(sprite != nullptr)
-			{
-				RenderCommand command {
-					.Sprite = sprite,
-					.DstRect {(float)pos.x,(float)pos.y,120 * 3,80 * 3},
-					.Angle = 0.0f,
-					.Flip = m_char.GetLookDirection() == Direction::LEFT?SDL_FLIP_HORIZONTAL:SDL_FLIP_NONE,
-				};
-				queue.Push(command);
-			}
-		}
-		layer = m_app->GetLayerStack().GetLayerByID(LayerID::DEBUG_ID);
-		if (layer) {
-			RenderQueue& queue = layer->GetRenderQueue();
-			const Sprite* sprite = m_animationInstance->GetCurrentSprite();
-			if(sprite != nullptr)
-			{
-				RenderCommand command {
-					.Sprite = sprite,
-					.DstRect {0,0,60,40},
-					.Angle = 0.0f,
-					.Flip = SDL_FLIP_HORIZONTAL
-				};
-				queue.Push(command);
-			}
-		}
-		// TODO: Add rendering logic for the demo game state
+
 	}
 
 	void PostFrame() override {
-		// TODO: Add logic after frame update
+		
 	}
 private:
-	std::unique_ptr<AnimationInstance> m_animationInstance;
 	Application* m_app;
 };
 
