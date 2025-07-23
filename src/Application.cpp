@@ -12,7 +12,7 @@ class DemoGameState : public IState
 {
 public:
 	DemoGameState(Application* app) : 
-		IState(m_app->m_fsm.get()),
+		IState(app->m_fsm.get()),
 		m_app(app),
 		m_char(nullptr)
 	{
@@ -22,8 +22,11 @@ public:
 	void Enter() override
 	{
 		// TODO: Add logic for entering the demo game state
-		m_animationInstance = std::make_unique<AnimationInstance>(m_app->GetAssetsManager().GetAnimation("run"));
-		m_animationInstance->Play();
+		m_char = std::make_unique<BaseChar>();
+		m_char->m_animations[MOVING] = std::make_unique<AnimationInstance>(m_app->GetAssetsManager().GetAnimation("run"));
+		m_char->m_animations[IDLE] = std::make_unique<AnimationInstance>(m_app->GetAssetsManager().GetAnimation("idle"));
+		m_char->m_animations[FALLING] = std::make_unique<AnimationInstance>(m_app->GetAssetsManager().GetAnimation("attack"));
+		m_char->GetCurrentAnimation()->Play();
 	}
 
 	void Exit() override
@@ -293,7 +296,7 @@ void Application::LoadAssets()
 	}
 	m_assetManager->CreateSpriteSheet("run", sprites);
 
-	// m_assetManager->CreateAnimation("idle", "idle", 10, true);
-	// m_assetManager->CreateAnimation("attack", "attack", 10, false);
+	m_assetManager->CreateAnimation("idle", "idle", 10, true);
+	m_assetManager->CreateAnimation("attack", "attack", 10, false);
 	m_assetManager->CreateAnimation("run", "run", 10, false);
 }

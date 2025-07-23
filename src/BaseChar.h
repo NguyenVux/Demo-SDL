@@ -2,10 +2,6 @@
 #include "FSM.h"
 
 class RenderQueue;
-enum Direction {
-	LEFT,
-	RIGHT,
-};
 
 enum CharacterState
 {
@@ -13,6 +9,8 @@ enum CharacterState
 	MOVING,
 	ATTACKING,
 	DAMAGE,
+	FALLING,
+	JUMPING,
 };
 
 
@@ -36,20 +34,19 @@ class Idle : public BaseState
 class BaseChar {
 public:
 	BaseChar();
-	Direction GetLookDirection() { return m_lookDirection; }
-	void Update();
+	virtual void Update();
+	AnimationInstance* GetCurrentAnimation();
 	void Render(RenderQueue& queue);
 	void RenderDebug(RenderQueue& queue);
-	void Move(Direction direction);
-	void Idle();
 	SDL_FPoint GetPosition() { return m_position; }
+	std::unordered_map<CharacterState,std::unique_ptr<AnimationInstance>> m_animations;
 private:
+	SDL_FPoint m_velocity;
 	float m_speed;
 	float m_scale;
 	SDL_FPoint m_position;
 	SDL_FPoint m_normOrigin;
-	Direction m_lookDirection;
 	CharacterState m_currentState;
-	std::unordered_map<CharacterState,AnimationInstance*> m_animations;
+	bool facingRight;
 	FSM m_fsm;
 };

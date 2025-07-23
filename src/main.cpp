@@ -29,9 +29,9 @@ void init()
 	app.Init();
 	std::cout << "Initializing application..." << std::endl;
 	app.AddLayer(std::make_unique<MainGameLayer>(&app));
-#ifndef NDEBUG
-	app.AddLayer(std::make_unique<DebugLayer>(&app));
-#endif // NDEBUG
+// #ifndef NDEBUG
+// 	app.AddLayer(std::make_unique<DebugLayer>(&app));
+// #endif // NDEBUG
 }
 
 int main(int argc, char *argv[])
