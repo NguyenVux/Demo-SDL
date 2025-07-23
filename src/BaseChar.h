@@ -37,12 +37,12 @@ class BaseChar {
 public:
 	BaseChar();
 	Direction GetLookDirection() { return m_lookDirection; }
-	void Render(const RenderQueue& queue);
-	void RenderDebug(const RenderQueue& queue);
+	void Update();
+	void Render(RenderQueue& queue);
+	void RenderDebug(RenderQueue& queue);
 	void Move(Direction direction);
 	void Idle();
 	SDL_FPoint GetPosition() { return m_position; }
-	void Update();
 private:
 	float m_speed;
 	float m_scale;

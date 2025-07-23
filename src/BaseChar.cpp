@@ -19,13 +19,7 @@ BaseChar::BaseChar() :
 	};
 }
 
-
-void BaseChar::SetState(CharacterState state) {
-	if (m_currentState == state) return;
-
-}
-
-void BaseChar::Update(float deltaTime) {
+void BaseChar::Update() {
 
 }
 
