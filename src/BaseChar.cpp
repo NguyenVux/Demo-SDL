@@ -29,39 +29,12 @@ void BaseChar::Update(float deltaTime) {
 
 }
 
-void BaseChar::Render(const RenderQueue& queue)
+void BaseChar::Render(RenderQueue& queue)
 {
 
 }
 
-void BaseChar::RenderDebug(const RenderQueue& queue)
+void BaseChar::RenderDebug(RenderQueue& queue)
 {
 	
-}
-
-void BaseChar::Move(Direction direction)
-{
-	if(direction != m_lookDirection)
-	{
-		m_lookDirection = direction;	
-	}
-	switch(direction)
-	{
-		case Direction::LEFT:
-			{
-				m_position.x -= m_speed;
-			}
-			break;
-		case Direction::RIGHT:
-			{
-				m_position.x += m_speed;
-			}
-			break;
-	}
-	m_currentState = CharacterState::MOVING;
-}
-
-void BaseChar::Idle()
-{
-	m_currentState = CharacterState::IDLE;
 }

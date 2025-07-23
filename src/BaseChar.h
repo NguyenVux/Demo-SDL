@@ -42,10 +42,7 @@ public:
 	void Move(Direction direction);
 	void Idle();
 	SDL_FPoint GetPosition() { return m_position; }
-	std::unordered_map<CharacterState,AnimationInstance*> m_animations;
-	// State logic
-	void SetState(CharacterState state);
-	void Update(float deltaTime);
+	void Update();
 private:
 	float m_speed;
 	float m_scale;
@@ -53,5 +50,6 @@ private:
 	SDL_FPoint m_normOrigin;
 	Direction m_lookDirection;
 	CharacterState m_currentState;
+	std::unordered_map<CharacterState,AnimationInstance*> m_animations;
 	FSM m_fsm;
 };
