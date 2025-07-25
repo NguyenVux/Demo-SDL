@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "BaseChar.h"
-#include "math.h"
 
 BaseChar::BaseChar() : m_speed(200.0f),
 					   m_scale(2.0f),
@@ -20,7 +19,6 @@ BaseChar::BaseChar() : m_speed(200.0f),
 
 void BaseChar::Update()
 {
-
 	CharacterState lastState = m_currentState;
 	CharacterState nextState = m_currentState;
 

@@ -17,6 +17,7 @@
 #define ASSERT(condition,message)
 #endif
 
+#include "glm/glm.hpp"
 
 
 #include "Time.h"
@@ -25,6 +26,7 @@
 #include "AssetsManager.h"
 #include "FSM.h"
 #include "IState.h"
+#include <entt/entt.hpp>
 
 enum LayerID
 {

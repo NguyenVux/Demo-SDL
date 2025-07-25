@@ -4,8 +4,6 @@ project(DemoSDL)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD 20)
 
-
-add_subdirectory(${CMAKE_SOURCE_DIR}/box2d)
 set(GAME_SOURCES
     ${CMAKE_SOURCE_DIR}/src/main.cpp
     ${CMAKE_SOURCE_DIR}/src/FSM.cpp
@@ -32,9 +30,12 @@ set(GAME_SOURCES
     ${CMAKE_SOURCE_DIR}/src/BaseChar.cpp
 )
 
+add_subdirectory(entt)
+
+find_package(glm CONFIG REQUIRED)
 LIST(APPEND LINK_OPTIONS)
 LIST(APPEND COMPILE_OPTIONS)
-LIST(APPEND LINK_LIBRARIES box2d::box2d)
+LIST(APPEND LINK_LIBRARIES glm::glm EnTT::EnTT)
 
 if(EMSCRIPTEN)
     LIST(APPEND COMPILE_OPTIONS 
