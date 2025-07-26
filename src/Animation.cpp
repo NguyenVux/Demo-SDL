@@ -1,6 +1,7 @@
 
 #include "pch.h"
 #include "Animation.h"
+#include "Windows.h"
 
 void AnimationInstance::Update()
 {

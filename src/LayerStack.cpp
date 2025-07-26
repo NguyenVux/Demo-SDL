@@ -52,18 +52,6 @@ void LayerStack::Clear() {
 	}
 	m_layers.clear();
 }
-
-void LayerStack::PreFrame() {
-	for (auto& layer : m_layers) {
-		if (layer != nullptr) {
-			if(!layer->IsEnabled()) {
-				continue;
-			}
-			layer->PreFrame();
-		}
-	}
-}
-
 void LayerStack::Update() {
 	for (auto& layer : m_layers) {
 		if (layer != nullptr) {

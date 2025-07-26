@@ -9,7 +9,7 @@ class MainGameLayer : public ILayer
 public:
 	MainGameLayer(Application *app);
 	~MainGameLayer() override;
-	void PreFrame() override;
+	
 	void Update() override;
 	void FlushCommandQueue() override;
 	void PostFrame() override;

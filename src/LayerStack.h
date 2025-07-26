@@ -13,7 +13,7 @@ public:
 	void RemoveLayer(ILayer* layer);
 	void Clear();
 	
-	void PreFrame();
+	
 	void Update();
 	void FlushCommandQueue();
 	void PostFrame();

@@ -8,9 +8,7 @@ MainGameLayer::MainGameLayer(Application *app) :
 
 }
 
-void MainGameLayer::PreFrame()
-{
-}
+
 void MainGameLayer::Update()
 {
 }

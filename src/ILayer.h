@@ -3,12 +3,20 @@
 #include "pch.h"
 #include "RenderQueue.h"
 
+class ISystem {
+public:
+	ISystem(entt::registry& registry);
+	virtual void Update() = 0;
+protected:
+	entt::registry& m_registry;
+};
+
 class ILayer
 {
 public:
 	ILayer(int id) : m_id(id), m_enabled(true) {}
 	virtual void Init() {}
-	virtual void PreFrame() {}
+	
 	virtual void Update() {}
 	virtual void FlushCommandQueue() {}
 	virtual void PostFrame() {}

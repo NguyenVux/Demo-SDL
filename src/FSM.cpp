@@ -38,12 +38,6 @@ int FSM::GetCurrentStateID() const {
 	   return m_currentStateID;
 }
 
-void FSM::PreFrame() {
-	   if (m_currentStateID != -1 && HasState(m_currentStateID)) {
-			   m_stateMap[m_currentStateID]->PreFrame();
-	   }
-}
-
 void FSM::Render() {
 	   if (m_currentStateID != -1 && HasState(m_currentStateID)) {
 			   m_stateMap[m_currentStateID]->Render();

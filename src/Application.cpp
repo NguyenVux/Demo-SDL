@@ -5,8 +5,8 @@
 #include "pch.h"
 #include "Application.h"
 #include <SDL_render.h>
+#include <cstdint>
 #include <format>
-#include "BaseChar.h"
 enum class GameState : int
 {
 	GAMEPLAY_STATE = 0
@@ -18,34 +18,29 @@ class DemoGameState : public IState
 private:
 	entt::registry registry;
 	entt::entity entity;
+	const Animation* anim;
 public:
 	DemoGameState(Application* app) : 
 		IState(app->m_fsm.get()),
-		m_app(app),
-		m_char(nullptr)
+		m_app(app)
 	{
-		using namespace Components;
-		entity = registry.create();
-		registry.emplace<Position>(entity, 0.0f,0.0f);
-		registry.emplace<Collider>(entity, 0.0f,0.0f,120.0f,80.0f);
 
-		entity = registry.create();
-		registry.emplace<Position>(entity, 0.0f,80.0f);
-		registry.emplace<Collider>(entity, 0.0f,0.0f,120.0f,80.0f);
 	}
 	~DemoGameState() override = default;
 
 	void Enter() override
 	{
-		m_char = std::make_unique<BaseChar>();
-		m_char->m_animations[MOVING] = std::make_unique<AnimationInstance>(m_app->GetAssetsManager().GetAnimation("run"));
-		m_char->m_animations[IDLE] = std::make_unique<AnimationInstance>(m_app->GetAssetsManager().GetAnimation("idle"));
-		m_char->m_animations[FALLING] = std::make_unique<AnimationInstance>(m_app->GetAssetsManager().GetAnimation("attack"));
-		m_char->GetCurrentAnimation()->Play();
-		auto view = registry.view<Components::Position>();
-		for (auto [entity, pos] : view.each()) {
-			printf("This player pos is %f %f\n",pos.x,pos.y);
-		}
+		anim = m_app->GetAssetsManager().GetAnimation("run");
+		using namespace Components;
+		entity = registry.create();
+		registry.emplace<Position>(entity, 0.0f,0.0f);
+		registry.emplace<Collider>(entity, 0.0f,0.0f,120.0f,80.0f);
+		registry.emplace<AnimInstance>(entity, anim->GetLength(),0ULL,3.0f,0ULL,anim->GetFPS());
+
+		entity = registry.create();
+		registry.emplace<Position>(entity, 0.0f,80.0f);
+		registry.emplace<Collider>(entity, 0.0f,0.0f,120.0f,80.0f);
+		registry.emplace<AnimInstance>(entity, anim->GetLength(),0ULL,1.0f,0ULL,anim->GetFPS());
 	}
 
 	void Exit() override
@@ -54,16 +49,21 @@ public:
 		m_animationInstance.reset();
 	}
 
-	void PreFrame() override
-	{
-		// TODO: Add logic before frame update
-	}
+	
 
 	void Update() override
 	{
-		if (m_char != nullptr)
+		auto view = registry.view<Components::AnimInstance>();
+		uint64_t deltaTime = Time::GetDeltaTime();
+		for(auto [enitty, animInstance] : view.each())
 		{
-			m_char->Update();
+			uint64_t SecondPerFrame = 1000/(animInstance.FPS * animInstance.Speed);
+			animInstance.AccumulatedTime += deltaTime;	
+			if(animInstance.AccumulatedTime > SecondPerFrame)
+			{
+				animInstance.AccumulatedTime -= SecondPerFrame;
+				animInstance.CurrentFrame = (animInstance.CurrentFrame + 1) % animInstance.FrameCount;
+			}
 		}
 	}
 
@@ -72,9 +72,10 @@ public:
 		ILayer *layer = m_app->GetLayerStack().GetLayerByID(LayerID::GAMELAYER_ID);
 		if (layer)
 		{
-			auto view = registry.view<Components::Position,Components::Collider>();
-			const Sprite* spr = m_app->GetAssetsManager().GetSprite("idle_1");
-			for (auto [entity, pos, collider] : view.each()) {
+			auto view = registry.view<Components::Position, Components::Collider, Components::AnimInstance>();
+			// const Sprite* spr = m_app->GetAssetsManager().GetSprite("idle_1");
+			for (auto [entity, pos, collider, animInstance] : view.each()) {
+				const Sprite* spr = anim->GetSpriteAt(animInstance.CurrentFrame);
 				RenderCommand command
 				{
 					.Sprite = spr,
@@ -86,37 +87,28 @@ public:
 				};
 				layer->GetRenderQueue().Push(command);
 			}
-			// if (m_char != nullptr)
-			// {
-			// 	m_char->Render(layer->GetRenderQueue());
-			// }
 		}
 		layer = m_app->GetLayerStack().GetLayerByID(LayerID::DEBUG_ID);
 		if (layer)
 		{
-			// if (m_char != nullptr)
-			// {
-			// 	m_char->RenderDebug(layer->GetRenderQueue());
-			// }
+
 		}
-		// TODO: Add rendering logic for the demo game state
 	}
 
 	void PostFrame() override
 	{
-		// TODO: Add logic after frame update
+
 	}
 
 private:
-	std::unique_ptr<AnimationInstance> m_animationInstance;	
-	std::unique_ptr<BaseChar> m_char;
+	std::unique_ptr<AnimationInstance> m_animationInstance;
 	Application* m_app;
 };
 
 Application::Application()
 	: m_initialized(false), m_window(nullptr), m_renderer(nullptr), m_isExiting(false), m_fsm(std::make_unique<FSM>()), m_assetManager(nullptr)
 {
-	// Add DemoGameState to FSM
+
 	m_fsm->AddState(static_cast<int>(GameState::GAMEPLAY_STATE), std::make_unique<DemoGameState>(this));
 }
 
@@ -194,7 +186,6 @@ void Application::Loop()
 {
 	if (m_initialized)
 	{
-		// Handle SDL events
 		SDL_Event event;
 		while (SDL_PollEvent(&event))
 		{
@@ -223,20 +214,16 @@ void Application::Loop()
 				}
 			}
 		}
-
-		SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, 255);
-		SDL_RenderClear(m_renderer);
-
 		// Call FSM lifecycle
-		m_fsm->PreFrame();
-		m_layerStack.PreFrame();
-
 		m_fsm->Update();
 		m_layerStack.Update();
 
+		
+
+		SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, 255);
+		SDL_RenderClear(m_renderer);
 		m_fsm->Render();
 		m_layerStack.FlushCommandQueue();
-
 		SDL_RenderPresent(m_renderer);
 
 		m_fsm->PostFrame();

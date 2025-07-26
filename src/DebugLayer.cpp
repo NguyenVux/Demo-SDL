@@ -7,9 +7,7 @@ m_app(app)
 {
 }
 
-void DebugLayer::PreFrame()
-{
-}
+
 void DebugLayer::Update() {
 }
 void DebugLayer::FlushCommandQueue() {
