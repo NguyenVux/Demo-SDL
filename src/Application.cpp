@@ -1,32 +1,51 @@
 
+#include "Components.h"
+#include "RenderQueue.h"
+#include "entt/entity/fwd.hpp"
 #include "pch.h"
 #include "Application.h"
-#include <stdexcept>
+#include <SDL_render.h>
 #include <format>
 #include "BaseChar.h"
 enum class GameState : int
 {
 	GAMEPLAY_STATE = 0
 };
+
+
 class DemoGameState : public IState
 {
+private:
+	entt::registry registry;
+	entt::entity entity;
 public:
 	DemoGameState(Application* app) : 
 		IState(app->m_fsm.get()),
 		m_app(app),
 		m_char(nullptr)
 	{
+		using namespace Components;
+		entity = registry.create();
+		registry.emplace<Position>(entity, 0.0f,0.0f);
+		registry.emplace<Collider>(entity, 0.0f,0.0f,120.0f,80.0f);
+
+		entity = registry.create();
+		registry.emplace<Position>(entity, 0.0f,80.0f);
+		registry.emplace<Collider>(entity, 0.0f,0.0f,120.0f,80.0f);
 	}
 	~DemoGameState() override = default;
 
 	void Enter() override
 	{
-		// TODO: Add logic for entering the demo game state
 		m_char = std::make_unique<BaseChar>();
 		m_char->m_animations[MOVING] = std::make_unique<AnimationInstance>(m_app->GetAssetsManager().GetAnimation("run"));
 		m_char->m_animations[IDLE] = std::make_unique<AnimationInstance>(m_app->GetAssetsManager().GetAnimation("idle"));
 		m_char->m_animations[FALLING] = std::make_unique<AnimationInstance>(m_app->GetAssetsManager().GetAnimation("attack"));
 		m_char->GetCurrentAnimation()->Play();
+		auto view = registry.view<Components::Position>();
+		for (auto [entity, pos] : view.each()) {
+			printf("This player pos is %f %f\n",pos.x,pos.y);
+		}
 	}
 
 	void Exit() override
@@ -53,18 +72,32 @@ public:
 		ILayer *layer = m_app->GetLayerStack().GetLayerByID(LayerID::GAMELAYER_ID);
 		if (layer)
 		{
-			if (m_char != nullptr)
-			{
-				m_char->Render(layer->GetRenderQueue());
+			auto view = registry.view<Components::Position,Components::Collider>();
+			const Sprite* spr = m_app->GetAssetsManager().GetSprite("idle_1");
+			for (auto [entity, pos, collider] : view.each()) {
+				RenderCommand command
+				{
+					.Sprite = spr,
+					.DstRect = {pos.x,pos.y,(float)spr->SourceRect.w,(float)spr->SourceRect.h},
+					.Angle = 0.0f,
+					.Center = {0.0f,0.0f},
+					.Flip = SDL_RendererFlip::SDL_FLIP_NONE,
+					
+				};
+				layer->GetRenderQueue().Push(command);
 			}
+			// if (m_char != nullptr)
+			// {
+			// 	m_char->Render(layer->GetRenderQueue());
+			// }
 		}
 		layer = m_app->GetLayerStack().GetLayerByID(LayerID::DEBUG_ID);
 		if (layer)
 		{
-			if (m_char != nullptr)
-			{
-				m_char->RenderDebug(layer->GetRenderQueue());
-			}
+			// if (m_char != nullptr)
+			// {
+			// 	m_char->RenderDebug(layer->GetRenderQueue());
+			// }
 		}
 		// TODO: Add rendering logic for the demo game state
 	}

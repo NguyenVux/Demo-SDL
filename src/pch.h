@@ -1,4 +1,5 @@
 #pragma once
+#include <SDL_rect.h>
 #include <stdio.h>
 #include <memory>
 #include <iostream>
@@ -18,7 +19,7 @@
 #endif
 
 #include "glm/glm.hpp"
-
+#include "entt/entt.hpp"
 
 #include "Time.h"
 #include "Application.h"
@@ -26,7 +27,6 @@
 #include "AssetsManager.h"
 #include "FSM.h"
 #include "IState.h"
-#include <entt/entt.hpp>
 
 enum LayerID
 {
