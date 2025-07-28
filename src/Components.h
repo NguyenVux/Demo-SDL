@@ -3,16 +3,31 @@
 #include <cstdint>
 namespace Components {
 
-using Position = glm::vec2;
 using Velocity = glm::vec2;
 using Collider = SDL_FRect;
 
+struct Transform
+{
+	glm::vec2 m_position;
+	glm::vec2 m_scale;
+};
+
 struct AnimInstance {
-  int FrameCount;
-  uint64_t CurrentFrame;
+  bool IsPlaying;
   float Speed;
+  uint64_t CurrentFrame;
   uint64_t AccumulatedTime;
-  int FPS;
+  const Animation* anim;
+};
+
+struct SpriteRenderData {
+  const Sprite* spr;
+  glm::vec2 m_origin;
+};
+
+struct CharState {
+  bool IsFacingRight;
+  bool lastStateMoving;
 };
 
 } // namespace Components
