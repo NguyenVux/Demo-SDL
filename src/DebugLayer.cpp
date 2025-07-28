@@ -1,30 +1,17 @@
-#include "pch.h"
 #include "DebugLayer.h"
+#include "pch.h"
 
-DebugLayer::DebugLayer(Application* app):
-ILayer(LayerID::DEBUG_ID),
-m_app(app)
-{
-}
+DebugLayer::DebugLayer(Application *app)
+    : ILayer(LayerID::DEBUG_ID), m_app(app) {}
 
-
-void DebugLayer::Update() {
-}
+void DebugLayer::Update() {}
 void DebugLayer::FlushCommandQueue() {
-	RenderCommand command;
-	while (m_renderQueue.Dequeue(command))
-	{
-		SDL_RenderCopyExF(
-			m_app->GetRenderer(),
-			command.Sprite->TexturePtr,
-			&command.Sprite->SourceRect,
-			&command.DstRect,
-			command.Angle,
-			&command.Center,
-			command.Flip
-		);
-	}
+  RenderCommand command;
+  while (m_renderQueue.Dequeue(command)) {
+    SDL_RenderCopyExF(m_app->GetRenderer(), command.Sprite->TexturePtr,
+                      &command.Sprite->SourceRect, &command.DstRect,
+                      command.Angle, &command.Center, command.Flip);
+  }
 }
-void DebugLayer::PostFrame() {
-}
+void DebugLayer::PostFrame() {}
 DebugLayer::~DebugLayer() {}

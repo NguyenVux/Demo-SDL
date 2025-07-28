@@ -5,22 +5,18 @@ class FSM;
 
 class IState {
 public:
-	IState(FSM* fsm) 
-		: m_fsm(fsm)
-	{
-	}
-	virtual void Enter() {}
-	virtual void Exit() {}
-	
-	virtual void Update() {}
-	virtual void Render() {}
-	virtual void PostFrame() {}
-	virtual ~IState() {}
-	void SetFSM(FSM* fsm) {
-		m_fsm = fsm;
-	}
-	bool CanTransitionToSelf() const { return m_canTransitionToSelf; }
+  IState(FSM *fsm) : m_fsm(fsm) {}
+  virtual void Enter() {}
+  virtual void Exit() {}
+
+  virtual void Update() {}
+  virtual void Render() {}
+  virtual void PostFrame() {}
+  virtual ~IState() {}
+  void SetFSM(FSM *fsm) { m_fsm = fsm; }
+  bool CanTransitionToSelf() const { return m_canTransitionToSelf; }
+
 private:
-	FSM* m_fsm;
-	bool m_canTransitionToSelf = false;
+  FSM *m_fsm;
+  bool m_canTransitionToSelf = false;
 };

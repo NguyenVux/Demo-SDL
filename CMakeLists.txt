@@ -27,6 +27,8 @@ set(GAME_SOURCES
     ${CMAKE_SOURCE_DIR}/src/RenderQueue.h
     ${CMAKE_SOURCE_DIR}/src/RenderQueue.cpp
     ${CMAKE_SOURCE_DIR}/src/Components.h
+    ${CMAKE_SOURCE_DIR}/src/Scene.cpp
+    ${CMAKE_SOURCE_DIR}/src/Scene.h
 )
 
 add_subdirectory(entt)

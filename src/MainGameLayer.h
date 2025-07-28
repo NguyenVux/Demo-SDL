@@ -1,22 +1,21 @@
 #pragma once
-#include "ILayer.h"
-#include "FSM.h"
 #include "Animation.h"
+#include "FSM.h"
+#include "ILayer.h"
 class Application;
 struct SDL_Texture;
-class MainGameLayer : public ILayer
-{
+class MainGameLayer : public ILayer {
 public:
-	MainGameLayer(Application *app);
-	~MainGameLayer() override;
-	
-	void Update() override;
-	void FlushCommandQueue() override;
-	void PostFrame() override;
-	void Destroy() override {}
-	void Init() override;
+  MainGameLayer(Application *app);
+  ~MainGameLayer() override;
+
+  void Update() override;
+  void FlushCommandQueue() override;
+  void PostFrame() override;
+  void Destroy() override {}
+  void Init() override;
 
 private:
-	FSM m_fsm;
-	Application *m_app;
+  FSM m_fsm;
+  Application *m_app;
 };
