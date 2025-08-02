@@ -1,6 +1,5 @@
-
-#include "Animation.h"
 #include "pch.h"
+#include "Animation.h"
 
 void AnimationInstance::Update() {
   if (!m_isPlaying || m_animation->GetLength() < 1) {
